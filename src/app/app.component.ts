@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { StructuralDirective } from "./structural-directive";
 import { DynamicComponent } from "./dynamic-component";
 import { ChangeDetectionApp } from "./change-detection";
+import { ReactiveFormComponent } from './reactive-forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp,ReactiveFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
