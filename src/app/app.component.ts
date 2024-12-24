@@ -5,11 +5,12 @@ import { Encapsulation } from "./encapsulation";
 import { ContentProjection } from "./content-projection";
 import { CommonModule } from '@angular/common';
 import { StructuralDirective } from "./structural-directive";
+import { DynamicComponent } from "./dynamic-component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
