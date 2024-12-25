@@ -10,11 +10,12 @@ import { ChangeDetectionApp } from "./change-detection";
 import { ReactiveFormComponent } from './reactive-forms';
 import { RxjsOperators } from "./rxjs-operators";
 import { CustomDirectives } from "./custom-directive";
+import { CustomPipe } from "./custom-pipes";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
