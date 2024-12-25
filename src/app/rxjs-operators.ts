@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {BehaviorSubject, ReplaySubject} from "rxjs"
+import {BehaviorSubject, concatMap, delay, fromEvent, mergeMap, Observable, of, ReplaySubject, Subject, switchMap, tap} from "rxjs"
 @Component({
   selector: 'app-rxjs-operators',
   template: ` <h1>Rxjs Subjects and Operators</h1> `,
@@ -8,8 +8,11 @@ import {BehaviorSubject, ReplaySubject} from "rxjs"
 })
 export class RxjsOperators implements OnInit {
   ngOnInit(): void {
-    this.useBehaviorSubject();
-    this.useReplaySubject()
+    // this.useBehaviorSubject();
+    // this.useReplaySubject()
+    // this.useSwitchOperator();
+    // this.useConcatOperator()
+    // this.useMergeOperator()
   }
 
   useBehaviorSubject() {
@@ -37,6 +40,70 @@ export class RxjsOperators implements OnInit {
     s.next(5);
   }
 
+  useSwitchOperator() {
+    const asyncOperation = (evt: any) => {
+      return of(evt).pipe(delay(Math.random() * 2000));
+    };
 
+    fromEvent(document, 'click')
+      .pipe(
+        tap((d) => {
+          console.log('Log before cancelled');
+        }),
+        switchMap((d) => asyncOperation(d))
+      )
+      .subscribe((evt) => {
+        console.log('Only Success', evt);
+      });
+  }
 
+  useConcatOperator() {
+    const asyncOperation = (evt: any) => {
+      return of(evt).pipe(delay(Math.random() * 5000));
+    };
+
+    fromEvent(document, 'click')
+      .pipe(
+        tap((d) => {
+          console.log(
+            'Log before',
+            (d as PointerEvent).x,
+            (d as PointerEvent).y
+          );
+        }),
+        concatMap((d) => asyncOperation(d))
+      )
+      .subscribe((d) => {
+        console.log(
+          'After Async',
+          (d as PointerEvent).x,
+          (d as PointerEvent).y
+        );
+      });
+  }
+
+  useMergeOperator() {
+    const asyncOperation = (evt: any) => {
+      return of(evt).pipe(delay(Math.random() * 5000));
+    };
+
+    fromEvent(document, 'click')
+      .pipe(
+        tap((d) => {
+          console.log(
+            'Log before',
+            (d as PointerEvent).x,
+            (d as PointerEvent).y
+          );
+        }),
+        mergeMap((d) => asyncOperation(d))
+      )
+      .subscribe((d) => {
+        console.log(
+          'After Async',
+          (d as PointerEvent).x,
+          (d as PointerEvent).y
+        );
+      });
+  }
 }
