@@ -5,8 +5,8 @@ import { Component, Pipe } from '@angular/core';
   standalone: true,
 })
 export class StringTransformPipe {
-  transform(str: any, ...arg: any[]) {
-    arg.forEach((d) => {
+  transform(str: any, ...arg: ["upper"| "lower" | "capital"]) {
+    arg?.forEach((d) => {
       if (d === 'upper') {
         str = str?.toUpperCase();
       }
@@ -14,7 +14,7 @@ export class StringTransformPipe {
         str = str?.toLowerCase();
       }
       if (d === 'capital') {
-        str = str?.slice(0, 1).toUpperCase() + str?.slice(1).toLowerCase();
+        str = str?.slice(0, 1)?.toUpperCase() + str?.slice(1)?.toLowerCase();
       }
     });
 
@@ -27,7 +27,7 @@ export class StringTransformPipe {
   standalone: true,
   template: `
     <h1 class="text-3xl text-red-700">Change Me ok</h1>
-    <p>{{ 'i am alone!' | stringTransform : 'upper' : 'lower' : 'capital' }}</p>
+    <p>{{ 'i am alone!' | stringTransform : 'lower' }}</p>
   `,
   imports: [StringTransformPipe],
 })
