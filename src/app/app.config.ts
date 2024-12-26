@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './http.interceptor';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreEffects } from './store';
+import { StoreEffects, storeReducer } from './store';
 import { StoreModule } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([httpInterceptor])),
     importProvidersFrom([
       StoreModule.forRoot(),
+      StoreModule.forFeature("store-reducer-featurekey",storeReducer),
       EffectsModule.forRoot([StoreEffects]),
     ]),
   ],

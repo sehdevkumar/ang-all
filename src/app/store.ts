@@ -1,7 +1,26 @@
-import { inject, Injectable } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
-import { createActionGroup, createReducer, emptyProps, on, props } from '@ngrx/store';
-import { mergeMap, of } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, Injectable, OnInit } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import {
+  createActionGroup,
+  createFeature,
+  createReducer,
+  emptyProps,
+  on,
+  props,
+  Store,
+} from '@ngrx/store';
+import {
+  catchError,
+  exhaustMap,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  switchMap,
+} from 'rxjs';
+import { CustomDirectives, LoadImageLazy } from './custom-directive';
 
 // create the states
 export type Posts = {
@@ -26,29 +45,33 @@ export const StoreActionGroup = createActionGroup({
   source: 'source must be a string literal type',
   events: {
     'fetch posts': emptyProps(),
-    'posts-success': props<{ posts: Posts[]}>(),
+    'posts-success': props<{ posts: Posts[] }>(),
   },
 });
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StoreEffects {
   actions = inject(Actions);
+  http = inject(HttpClient);
 
-  $fetchPostsAction = this.actions.pipe(
-    ofType(StoreActionGroup.fetchPosts),
-    mergeMap((d) => {
-      console.log('This action has fired...');
-
-      return of(d);
-    })
-  );
+  $fetchPostsAction = createEffect(() => {
+    return this.actions.pipe(
+      ofType(StoreActionGroup?.fetchPosts),
+      switchMap(() => {
+        return this.http
+          .get('https://jsonplaceholder.typicode.com/photos')
+          .pipe(
+            map((d) => {
+              return StoreActionGroup['posts-success']({ posts: d as any });
+            }),
+            catchError((d) => of(d))
+          );
+      })
+    );
+  });
 }
 
-
-
-// Create Store Reducers 
+// Create Store Reducers
 
 export const storeReducer = createReducer(
   initialStoreState,
@@ -58,12 +81,61 @@ export const storeReducer = createReducer(
       ...state,
     };
   }),
-  on(StoreActionGroup['posts-success'], (state,{posts}) => {
+  on(StoreActionGroup['posts-success'], (state, { posts }) => {
     return {
       ...state,
-      posts: posts
+      posts: posts,
     };
   })
 );
 
+// Create Selectors
 
+export const { selectPosts } = createFeature({
+  name: 'store-reducer-featurekey',
+  reducer: storeReducer,
+});
+
+// Store Component
+
+@Component({
+  selector: 'app-store-component',
+  standalone: true,
+  imports: [CommonModule, LoadImageLazy],
+  template: `
+
+  <div class='grid w-full h-full grid-cols-4 gap-4'>
+    @for (item of dataObserable$ | async ; track $index) {
+    
+    <section class='flex flex-col'>
+      <p>{{ item.title }}</p>
+      <img
+        class="w-full h-full opacity-1 object-cover rounded-md shadow-slate-700 shadow-md bg-red-200 opacity-0 transition-opacity duration-300"
+        loadImageLazy
+        [imageSrc]="item.url"
+        [attr.alt]="item.title"
+      />
+
+    </section>
+
+    }
+  </div>
+  `,
+})
+export class StoreComponent implements OnInit {
+  store = inject(Store);
+  dataObserable$!: Observable<Posts[]>;
+
+  ngOnInit(): void {
+    this.store.dispatch(StoreActionGroup.fetchPosts());
+
+    this.store.select(selectPosts).subscribe((d) => {
+      if (d) {
+        this.dataObserable$ = new Observable((ob) => {
+          ob.next(d.slice(0, 1000));
+          ob.complete();
+        });
+      }
+    });
+  }
+}

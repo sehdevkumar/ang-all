@@ -25,7 +25,7 @@ export class LoadImageLazy implements OnInit, OnDestroy {
   private renderer = inject(Renderer2);
   private ele = inject(ElementRef);
   private intersectObserver!: IntersectionObserver;
-
+  
   callKeydown(event: MouseEvent) {
     
   }
@@ -37,7 +37,10 @@ export class LoadImageLazy implements OnInit, OnDestroy {
       'src',
       'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
     );
-    this.useIntersectObserver();
+
+    requestAnimationFrame(()=> {
+      this.useIntersectObserver();
+    })
   }
 
   ngOnDestroy(): void {
