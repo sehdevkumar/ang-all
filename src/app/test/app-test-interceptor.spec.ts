@@ -1,36 +1,33 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { TestInterceptor } from "../test-interceptor"
-import { HttpClient, HttpHandler } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { TestInterceptor } from '../test-interceptor';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+describe('AppComponent', () => {
+  let component: TestInterceptor;
+  let fixture: ComponentFixture<TestInterceptor>;
 
-describe('App Test Interceptor Test',()=> {
-    
-    let fixer: ComponentFixture<TestInterceptor>;
-    let component: TestInterceptor;
-    let http:HttpClient
-    let httpHandlerSpy = jasmine.createSpyObj(HttpHandler,['handler','handle']);
-     
-    beforeAll(()=> {
-       
-        TestBed.configureTestingModule({
-           imports: [TestInterceptor,CommonModule],
-           providers: [HttpClient,HttpHandler]
-        }).compileComponents()
-      
-    
-          fixer = TestBed.createComponent(TestInterceptor);
-          component = fixer.componentInstance;
-          
-          http = TestBed.inject(HttpClient)
-          httpHandlerSpy = TestBed.inject(httpHandlerSpy);
-          fixer.detectChanges()
-    })
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [HttpClient], // Add any required providers (like services)
+      imports: [TestInterceptor, HttpClientModule], // Add any required modules (if any)
+    }).compileComponents();
 
-    it("Should create the component",()=> {
-         
-        expect(true).toBeTruthy()
+    fixture = TestBed.createComponent(TestInterceptor);
+    component = fixture.componentInstance;
+    fixture.detectChanges(); // Ensure bindings are applied
+  });
 
-    })
+  it('Created', () => {
+    expect(component).toBeTruthy();
+  });
 
-})
+  it('h1 tag', () => {
+    let element = fixture.debugElement.query(By.css('h1'));
+
+    expect(element).toBeTruthy();
+    expect(element.nativeElement.textContent.trim()).toContain(
+      'Test Interceptor'
+    );
+  });
+});
