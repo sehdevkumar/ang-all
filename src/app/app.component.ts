@@ -14,14 +14,21 @@ import { CustomPipe } from "./custom-pipes";
 import { TemplateDriven } from "./template-driven-form";
 import { LazyModules } from './load-lazy-module-routes';
 import { StoreComponent } from "./store";
+import { ErrorHandlerComponent } from "./global-error-boundaries";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'ang-all';
+   
+
+  constructor() {
+     
+  }
+  
 }

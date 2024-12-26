@@ -35,12 +35,10 @@ export class LoadImageLazy implements OnInit, OnDestroy {
     this.renderer.setAttribute(
       this.ele.nativeElement,
       'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+      'https://via.placeholder.com/600/92c952'
     );
 
-    requestAnimationFrame(()=> {
-      this.useIntersectObserver();
-    })
+    this.useIntersectObserver();
   }
 
   ngOnDestroy(): void {
