@@ -106,7 +106,7 @@ export const { selectPosts } = createFeature({
 
   <div class='grid w-full h-full grid-cols-4 gap-4'>
     @for (item of dataObserable$ | async ; track $index) {
-    
+      
     <section class='flex flex-col'>
       <p>{{ item.title }}</p>
       <img
@@ -117,8 +117,10 @@ export const { selectPosts } = createFeature({
       />
 
     </section>
-
-    }
+    
+  }@empty {
+    <button class='bg-blue-400 p-3 rounded-lg hover:bg-blue-600' (click)="onFetchData()">Load Posts</button>
+  }
   </div>
   `,
 })
@@ -127,7 +129,6 @@ export class StoreComponent implements OnInit {
   dataObserable$!: Observable<Posts[]>;
 
   ngOnInit(): void {
-    this.store.dispatch(StoreActionGroup.fetchPosts());
 
     this.store.select(selectPosts).subscribe((d) => {
       if (d) {
@@ -137,5 +138,10 @@ export class StoreComponent implements OnInit {
         });
       }
     });
+  }
+
+  onFetchData() {
+    this.store.dispatch(StoreActionGroup.fetchPosts());
+     
   }
 }
