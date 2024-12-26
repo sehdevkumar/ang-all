@@ -12,11 +12,12 @@ import { RxjsOperators } from "./rxjs-operators";
 import { CustomDirectives } from "./custom-directive";
 import { CustomPipe } from "./custom-pipes";
 import { TemplateDriven } from "./template-driven-form";
+import { LazyModules } from './load-lazy-module-routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven,LazyModules],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
