@@ -15,11 +15,12 @@ import { TemplateDriven } from "./template-driven-form";
 import { LazyModules } from './load-lazy-module-routes';
 import { StoreComponent } from "./store";
 import { ErrorHandlerComponent } from "./global-error-boundaries";
+import { CounterComponent } from "./test/counter";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
