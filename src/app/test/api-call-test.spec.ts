@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-    HttpClientTestingModule,
+  HttpClientTestingModule,
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
@@ -50,10 +50,8 @@ describe('ApiCallTest', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ApiCallTest,HttpClientTestingModule],
-      providers: [
-       
-      ],
+      imports: [ApiCallTest, HttpClientTestingModule],
+      providers: [],
     }).compileComponents();
     httpMock = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ApiCallTest);
@@ -62,8 +60,8 @@ describe('ApiCallTest', () => {
     const req = httpMock.expectOne(
       'https://jsonplaceholder.typicode.com/users'
     );
-    req.flush(mockUsers)
-});
+    req.flush(mockUsers);
+  });
 
   afterEach(() => {
     httpMock.verify(); // Verify that there are no outstanding HTTP requests
@@ -73,10 +71,20 @@ describe('ApiCallTest', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have ${mockUsers?.length}`,async ()=> {
-      fixture.detectChanges()
-      let element = fixture.debugElement.queryAll(By.css('div'));
-    expect(element.length).toEqual(9)
-    
-  })
+  it(`should have ${mockUsers?.length}`, async () => {
+    fixture.detectChanges();
+    let element = fixture.debugElement.queryAll(By.css('div'));
+    expect(element.length).toEqual(9);
+  });
+
+  it(`should Render the Name`, async () => {
+    fixture.detectChanges();
+    let element = fixture.debugElement.queryAll(By.css('div'));
+    const getTag = (index: number) => {
+      let nestedDiv = element.at(index)?.nativeElement;
+      return nestedDiv;
+    };
+    expect(getTag(0)?.textContent).toContain(' Name: John Doe ');
+    expect(getTag(6)?.textContent).toContain(' Name: Jane Smith ');
+  });
 });
