@@ -16,11 +16,12 @@ import { LazyModules } from './load-lazy-module-routes';
 import { StoreComponent } from "./store";
 import { ErrorHandlerComponent } from "./global-error-boundaries";
 import { CounterComponent } from "./test/counter";
+import { ApiCallTest } from "./test/api-call-test";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

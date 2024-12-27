@@ -24,7 +24,7 @@ export class CounterService{
   selector: 'app-counter',
   standalone: true,
   imports: [CommonModule],
-  providers:[CounterService],
+  providers:[],
   template: `
     <section class="w-full shadow-inner rounded-r-xl shadow-orange-300 gap-x-10 justify-center min-h-[200px] items-center h-full bg-lime-200 flex">
       <button
