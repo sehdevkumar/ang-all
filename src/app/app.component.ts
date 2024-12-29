@@ -18,11 +18,12 @@ import { ErrorHandlerComponent } from "./global-error-boundaries";
 import { CounterComponent } from "./test/counter";
 import { ApiCallTest } from "./test/api-call-test";
 import { DestroyRefComponent } from "./destroy-ref";
+import { ImageOptimization } from "./image-optimization";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest, DestroyRefComponent],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest, DestroyRefComponent, ImageOptimization],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -31,7 +32,7 @@ export class AppComponent {
    
 
   constructor() {
-     
+     console.log("Hi, from the app component")
   }
   
 }
