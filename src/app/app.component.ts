@@ -17,11 +17,12 @@ import { StoreComponent } from "./store";
 import { ErrorHandlerComponent } from "./global-error-boundaries";
 import { CounterComponent } from "./test/counter";
 import { ApiCallTest } from "./test/api-call-test";
+import { DestroyRefComponent } from "./destroy-ref";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest, DestroyRefComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
