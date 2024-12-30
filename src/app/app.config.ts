@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreEffects, storeReducer } from './store';
 import { StoreModule } from '@ngrx/store';
 import { ErrorBoundaries } from './global-error-boundaries';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 export function initializeApp(...args: any[]) {
@@ -46,6 +47,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: ErrorHandler,
       useClass: ErrorBoundaries,
-    },
+    }, provideAnimationsAsync(),
   ],
 };

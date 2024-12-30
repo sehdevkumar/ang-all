@@ -19,11 +19,12 @@ import { CounterComponent } from "./test/counter";
 import { ApiCallTest } from "./test/api-call-test";
 import { DestroyRefComponent } from "./destroy-ref";
 import { ImageOptimization } from "./image-optimization";
+import { InvetigateForm } from "./investigate-form";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest, DestroyRefComponent, ImageOptimization],
+  imports: [RouterOutlet, TestInterceptor, Encapsulation, ContentProjection, CommonModule, StructuralDirective, DynamicComponent, ChangeDetectionApp, ReactiveFormComponent, RxjsOperators, CustomDirectives, CustomPipe, TemplateDriven, LazyModules, StoreComponent, ErrorHandlerComponent, CounterComponent, ApiCallTest, DestroyRefComponent, ImageOptimization, InvetigateForm],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
