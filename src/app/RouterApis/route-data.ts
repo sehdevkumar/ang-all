@@ -18,7 +18,7 @@ export class RouteDataComponent {
     routeData: any;
 
     constructor(private route: ActivatedRoute) {
-        this.route.data.subscribe(data => {
+        this.route?.data?.subscribe(data => {
             if((data as any)?.config) {
                 this.routeData = (data as any).config;
             }
