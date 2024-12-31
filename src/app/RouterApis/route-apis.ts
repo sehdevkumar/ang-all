@@ -24,6 +24,8 @@ import { Route, RouterModule, Routes } from '@angular/router';
 */
 
 import { Component } from '@angular/core';
+import { ProtectedComponent } from './protected-component';
+import { GaurdClass } from './route-gaurd';
 
 @Component({
     selector: 'app-router-api',
@@ -85,12 +87,17 @@ export const RouteAPis: Routes = [
         loadComponent: () =>
           import('./load-component').then((d) => d.LoadComponent),
       },
-      
-        {
+
+      {
         path: 'load-children',
         loadChildren: () =>
           import('./lazy-loaded-childrens').then((d) => d.routesLazyLoaded),
-      }
+      },
+      {
+        path: 'protected-route',
+        canActivate: [new GaurdClass().canActivate],
+        component: ProtectedComponent,
+      },
     ],
   },
 ];
