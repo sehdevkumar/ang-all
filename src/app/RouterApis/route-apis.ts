@@ -26,6 +26,8 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { Component } from '@angular/core';
 import { ProtectedComponent } from './protected-component';
 import { GaurdClass } from './route-gaurd';
+import { QueryParamsComponent } from './query-params-component';
+import { RouteDataComponent } from './route-data';
 
 @Component({
     selector: 'app-router-api',
@@ -44,7 +46,7 @@ import { GaurdClass } from './route-gaurd';
                         <a routerLink="protected-route">Protected Route</a>
                     </li>
                     <li class="hover:text-blue-500 cursor-pointer">
-                        <a routerLink="query-params">Query Params</a>
+                        <a routerLink="query-params/1" [queryParams]="{name: 'sehdev'}">Query Params</a>
                     </li>
                     <li class="hover:text-blue-500 cursor-pointer">
                         <a routerLink="pass-data">Pass Data</a>
@@ -97,6 +99,19 @@ export const RouteAPis: Routes = [
         path: 'protected-route',
         canActivate: [new GaurdClass().canActivate],
         component: ProtectedComponent,
+      },
+
+      {
+        path: 'query-params/:id',
+        component: QueryParamsComponent,
+      },
+
+      {
+        path: 'pass-data',
+        data : {
+            config: 'sehdev'
+        },
+        component: RouteDataComponent,
       },
     ],
   },
