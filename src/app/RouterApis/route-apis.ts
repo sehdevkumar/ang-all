@@ -1,3 +1,4 @@
+
 import {
   PreloadingStrategy,
   Route,
@@ -27,6 +28,55 @@ import {
 19. redirectTo 
 20. preloading  ??  RouterPreloader ?? Un Explored Domain 
 */
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-router-api',
+    standalone: true,
+    template: `
+        <div class="w-full h-full min-h-[calc(100vh-100px)] grid overflow-hidden bg-gray-100 border border-gray-300 grid-cols-[max-content,1fr]">
+            <nav class="max-w-[200px] bg-white shadow-md p-4">
+                <ul class="flex flex-col gap-2">
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="load-component">Load Component</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="load-children">Load Children (Lazy Loading)</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="protected-route">Protected Route</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="query-params">Query Params</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="pass-data">Pass Data</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="providers">Providers</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="preloading">Preloading (Lazy)</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="resolver">Resolver</a>
+                    </li>
+                    <li class="hover:text-blue-500 cursor-pointer">
+                        <a routerLink="navigation-events">Navigation Events</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="container overflow-auto p-4">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    `,
+    imports: [RouterModule],
+    providers: []
+})
+export class RouterApisComponent {}
+
 
 import { Component, importProvidersFrom } from '@angular/core';
 import { ProtectedComponent } from './protected-component';
@@ -88,7 +138,6 @@ export const RouteAPis: Routes = [
   {
     path: '',
     component: RouterApisComponent,
-
     children: [
       {
         path: 'load-component',
